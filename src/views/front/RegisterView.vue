@@ -39,7 +39,7 @@ import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useRouter } from 'vue-router'
 import { useSnackbar } from 'vuetify-use-dialog'
-import { useApi } from '@/composable/axios'
+import { useApi } from '@/composables/axios'
 
 const { api } = useApi()
 
@@ -57,12 +57,9 @@ const schema = yup.object({
     .string()
     .required('信箱為必填欄位')
     // .test(自訂驗證名稱, 錯誤訊息, 驗證function)
-    .test(
-      'isEmail', '信箱格式錯誤',
-      (value) => {
-        return validator.isEmail(value)
-      }
-    ),
+    .test('isEmail', '信箱格式錯誤', (value) => {
+      return validator.isEmail(value)
+    }),
   password: yup
     .string()
     .required('密碼為必填欄位')
