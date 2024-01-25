@@ -4,110 +4,126 @@ import { useUserStore } from '@/store/user'
 
 const routes = [
   {
-    path: '/',
-    component: () => import('@/layouts/FrontLayout.vue'),
+    path: "/",
+    component: () => import("@/layouts/FrontLayout.vue"),
     children: [
       {
-        path: '',
-        name: 'Home',
-        component: () => import('@/views/front/HomeView.vue'),
+        path: "",
+        name: "Home",
+        component: () => import("@/views/front/HomeView.vue"),
         meta: {
-          title: '購物網',
+          title: "購物網",
           // 不用登入也能看
           login: false,
           // 不是管理員也能看
-          admin: false
-        }
+          admin: false,
+        },
       },
       {
-        path: 'register',
-        name: 'Register',
-        component: () => import('@/views/front/RegisterView.vue'),
+        path: "register",
+        name: "Register",
+        component: () => import("@/views/front/RegisterView.vue"),
         meta: {
-          title: '購物網 | 註冊',
+          title: "購物網 | 註冊",
           login: false,
-          admin: false
-        }
+          admin: false,
+        },
       },
       {
-        path: 'login',
-        name: 'Login',
-        component: () => import('@/views/front/LoginView.vue'),
+        path: "login",
+        name: "Login",
+        component: () => import("@/views/front/LoginView.vue"),
         meta: {
-          title: '購物網 | 登入',
+          title: "購物網 | 登入",
           login: false,
-          admin: false
-        }
+          admin: false,
+        },
       },
       {
-        path: 'products/:id',
-        name: 'Product',
-        component: () => import('@/views/front/ProductView.vue'),
+        path: "products/:id",
+        name: "Product",
+        component: () => import("@/views/front/ProductView.vue"),
         meta: {
-          title: '購物網 | 商品',
+          title: "購物網 | 商品",
           login: false,
-          admin: false
-        }
+          admin: false,
+        },
       },
       {
-        path: 'cart',
-        name: 'Cart',
-        component: () => import('@/views/front/CartView.vue'),
+        path: "cart",
+        name: "Cart",
+        component: () => import("@/views/front/CartView.vue"),
         meta: {
-          title: '購物網 | 購物車',
+          title: "購物網 | 購物車",
           login: true,
-          admin: false
-        }
+          admin: false,
+        },
       },
       {
-        path: 'orders',
-        name: 'Orders',
-        component: () => import('@/views/front/OrdersView.vue'),
+        path: "orders",
+        name: "Orders",
+        component: () => import("@/views/front/OrdersView.vue"),
         meta: {
-          title: '購物網 | 訂單',
+          title: "購物網 | 訂單",
           login: true,
-          admin: false
-        }
-      }
-    ]
+          admin: false,
+        },
+      },
+    ],
   },
   {
-    path: '/admin',
-    component: () => import('@/layouts/AdminLayout.vue'),
+    path: "/admin",
+    component: () => import("@/layouts/AdminLayout.vue"),
     children: [
       {
-        path: '',
-        name: 'AdminHome',
-        component: () => import('@/views/admin/HomeView.vue'),
+        path: "",
+        name: "AdminHome",
+        component: () => import("@/views/admin/HomeView.vue"),
         meta: {
-          title: '購物網 | 管理',
+          title: "購物網 | 管理",
           login: true,
-          admin: true
-        }
+          admin: true,
+        },
       },
       {
-        path: 'products',
-        name: 'AdminProducts',
-        component: () => import('@/views/admin/ProductsView.vue'),
+        path: "products",
+        name: "AdminProducts",
+        component: () => import("@/views/admin/ProductsView.vue"),
         meta: {
-          title: '購物網 | 商品管理',
+          title: "購物網 | 商品管理",
           login: true,
-          admin: true
-        }
+          admin: true,
+        },
       },
       {
-        path: 'orders',
-        name: 'AdminOrders',
-        component: () => import('@/views/admin/OrdersView.vue'),
+        path: "orders",
+        name: "AdminOrders",
+        component: () => import("@/views/admin/OrdersView.vue"),
         meta: {
-          title: '購物網 | 訂單管理',
+          title: "購物網 | 訂單管理",
           login: true,
-          admin: true
-        }
-      }
-    ]
-  }
-]
+          admin: true,
+        },
+      },
+    ],
+  },
+  // 404 頁面
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () => import('@/views/NotFoundView.vue'),
+    meta: {
+      title: "購物網 | 找不到",
+      login: false,
+      admin: false,
+    },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'All',
+    redirect: '/404'
+  },
+];
 
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
